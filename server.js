@@ -112,7 +112,9 @@ app.post("/register", async (req, res) => {
                         const data = new Data({username:req.body.username,notes:[]});
                         const foundResult = await data.save();
                         res.json({exist:false,
-                            status:true});
+                            status:true,
+                            newUser:true,
+                        notes:foundResult.notes});
                         
                     });
                 }
