@@ -30,7 +30,7 @@ app.use(session({
     secure: true,
     maxAge:60000
        },
-store: new RedisStore(),
+// store: new RedisStore(),
 // secret: 'secret',
 saveUninitialized: true,
 resave: false
