@@ -12,7 +12,7 @@ const { json } = require('body-parser');
 
 const app = express();
 
-
+app.set('trust proxy', 1);
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
@@ -32,11 +32,11 @@ app.use(session({
        },
 // store: new RedisStore(),
 // secret: 'secret',
-saveUninitialized: true,
-resave: false
+// saveUninitialized: true,
+// resave: false
     
-//     resave: false,
-//     saveUninitialized: true,
+    resave: false,
+    saveUninitialized: true,
     // cookie: {}
   }));
 app.use(passport.initialize());
