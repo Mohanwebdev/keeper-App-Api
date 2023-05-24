@@ -7,6 +7,7 @@ const cors = require("cors");
 const session =  require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
+const MongoStore = require('connect-mongo')(session);
 const { json } = require('body-parser');
 
 
@@ -34,7 +35,7 @@ app.use(session({
 // secret: 'secret',
 // saveUninitialized: true,
 // resave: false
-    
+    store: new MongoStore(options),
     resave: false,
     saveUninitialized: true,
     // cookie: {}
