@@ -4,7 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require("cors");
-const session =  require("cookie-session");
+const session =  require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const { json } = require('body-parser');
@@ -25,8 +25,18 @@ app.use(cors());
 
 app.use(session({
     secret:process.env.SECRET_KEY,
-    resave: false,
-    saveUninitialized: true,
+    
+    cookie:{
+    secure: true,
+    maxAge:60000
+       },
+store: new RedisStore(),
+// secret: 'secret',
+saveUninitialized: true,
+resave: false
+    
+//     resave: false,
+//     saveUninitialized: true,
     // cookie: {}
   }));
 app.use(passport.initialize());
