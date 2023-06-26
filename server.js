@@ -5,9 +5,11 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require("cors");
 const session =  require("express-session");
+const MemoryStore = require('memorystore')(session)
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
-const MongoStore = require('connect-mongo')(session);
+
+// const MongoStore = require('connect-mongo')(session);
 const { json } = require('body-parser');
 
 
@@ -26,16 +28,19 @@ app.use(function(req, res, next) {
 
 app.use(session({
     secret:process.env.SECRET_KEY,
-    
-    cookie:{
-    secure: true,
-    maxAge:60000
-       },
+    cookie: { maxAge: 86400000 },
+    store: new MemoryStore({
+      checkPeriod: 86400000 // prune expired entries every 24h
+    }),
+    resave: false,
+    // cookie:{
+    // secure: true,
+    // maxAge:60000
+    //    },
 // store: new RedisStore(),
 // secret: 'secret',
 // saveUninitialized: true,
 // resave: false
-    store: new MongoStore(options),
     resave: false,
     saveUninitialized: true,
     // cookie: {}
