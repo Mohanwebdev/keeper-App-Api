@@ -28,7 +28,7 @@ app.use(function(req, res, next) {
 
 app.use(session({
     secret:process.env.SECRET_KEY,
-  store: MongoStore.create({ mongoUrl: "mongodb+srv://"+process.env.DB_USERNAME+":"+process.env.DB_PASSWORD+"@cluster0.bn8mc.mongodb.net/NotesApp?retryWrites=true&w=majority"})
+  store: MongoStore.create({ mongoUrl: "mongodb+srv://"+process.env.DB_USERNAME+":"+process.env.DB_PASSWORD+"@cluster0.bn8mc.mongodb.net/NotesApp?retryWrites=true&w=majority"}),
     cookie: { maxAge: 86400000 },
     resave: false,
     saveUninitialized: true,
