@@ -26,6 +26,8 @@ app.use(function(req, res, next) {
   next();
   });
 
+try{
+  
 app.use(session({
     secret:process.env.SECRET_KEY,
   store: MongoStore.create({ mongoUrl: "mongodb+srv://"+process.env.DB_USERNAME+":"+process.env.DB_PASSWORD+"@cluster0.bn8mc.mongodb.net/NotesApp?retryWrites=true&w=majority"}),
@@ -34,6 +36,12 @@ app.use(session({
     saveUninitialized: true,
     // cookie: {}
   }));
+
+}
+catch(err){
+  
+}
+
 app.use(passport.initialize());
 app.use(passport.session());
 
