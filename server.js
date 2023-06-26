@@ -18,7 +18,21 @@ const app = express();
 app.set('trust proxy', 1);
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
+
+const corsOpts = {
+  origin: '*',
+
+  methods: [
+    'GET',
+    'POST',
+  ],
+
+  allowedHeaders: [
+    'Content-Type',
+  ],
+};
+
+app.use(cors(corsOpts));
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -26,8 +40,6 @@ app.use(function(req, res, next) {
   next();
   });
 
-try{
-  
 app.use(session({
     secret:process.env.SECRET_KEY,
   store: MongoStore.create({ mongoUrl: "mongodb+srv://"+process.env.DB_USERNAME+":"+process.env.DB_PASSWORD+"@cluster0.bn8mc.mongodb.net/NotesApp?retryWrites=true&w=majority"}),
@@ -37,11 +49,6 @@ app.use(session({
     // cookie: {}
   }));
 
-}
-catch(err){
-  //pass
-  console.log(err)
-}
 
 app.use(passport.initialize());
 app.use(passport.session());
