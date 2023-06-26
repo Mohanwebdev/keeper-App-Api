@@ -40,6 +40,7 @@ app.use(session({
 }
 catch(err){
   //pass
+  console.log(err)
 }
 
 app.use(passport.initialize());
