@@ -39,7 +39,7 @@ app.use(session({
 
 }
 catch(err){
-  
+  //pass
 }
 
 app.use(passport.initialize());
